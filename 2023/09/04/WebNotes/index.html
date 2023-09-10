@@ -16,7 +16,7 @@
 <meta property="og:description" content="JavaWebMysql一.mysql增删改查maven一.java连接mysql与数据库连接池二.Mybatis框架连接操作数据库1.GetStarted(约束)​	1.1添加以下mybatis依赖到pom.xml中 ​	1.2在resources目录下创建mybatis-config.xml(文件名可自定义) ​	1.3在pom.xml中加入mysql驱动 ​	1.4在pom.xml中加入lo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-04T06:26:30.971Z">
-<meta property="article:modified_time" content="2023-09-06T09:27:04.221Z">
+<meta property="article:modified_time" content="2023-09-08T06:44:27.373Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -166,19 +166,20 @@
 <p>​		接着resource下创建log4j2.xml(文件名固定,就像logback只能使用logback.xml名字一样)</p>
 <p>​	1.5配置单元测试框架</p>
 <h5 id="2-访问数据库-使用Mybatis功能"><a href="#2-访问数据库-使用Mybatis功能" class="headerlink" title="2.访问数据库(使用Mybatis功能)"></a>2.访问数据库(使用Mybatis功能)</h5><p>​	2.1在entity目录下创建实体类</p>
-<p>​	2.2 创s件</p>
+<p>​	2.2 创建映射文件</p>
 <p>​	2.3添加Mapper.xml映射关系</p>
 <p>​	2.4创建接口(最常用)</p>
 <h3 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h3><h5 id="一-约束条件"><a href="#一-约束条件" class="headerlink" title="一.约束条件"></a>一.约束条件</h5><h5 id="二-使用Mybatis操作数据库"><a href="#二-使用Mybatis操作数据库" class="headerlink" title="二.使用Mybatis操作数据库"></a>二.使用Mybatis操作数据库</h5><h5 id="三-Mybatis进阶"><a href="#三-Mybatis进阶" class="headerlink" title="三.Mybatis进阶"></a>三.Mybatis进阶</h5><p>上午</p>
 <ol>
 <li><p>使用JavaBean插入数据,传递实体对象作为参数.</p>
 </li>
-<li><p>插入记录返回 记录的id</p>
+<li><p>插入记录返回记录的id</p>
 </li>
-<li><p><if>&gt;<if/>根据条件查询,如果为null就不执行</p>
+<li><p><if><if/>根据条件查询,如果为null就不执行</p>
 </li>
 </ol>
 <p>下午</p>
+<p>注解sql–&gt;sql比较简单时</p>
 <ol>
 <li><choose></li>
 </ol>
@@ -193,6 +194,11 @@
 <li><p>插入记录返回主键(2)</p>
 </li>
 <li><p>sql语句复用和数值映射sql</p>
+<p>1).sql语句复用</p>
+<p>因为我们在mapper里面书写增删改查的sql语句有sql语句重复时,可以使用sql复用,这样可以使代码更加简洁优雅首.首先定义这个sql复用时一定需要定义一个id标签, 然后在使用时<include/>标签,<include/>标签是一个自闭标签,使用sql复用语句,注意一定需要把id传入才能访问到.</p>
+<p>2)数值映射sql</p>
+<p>使用数据库定义数据时,通常会使用数字代表一些内容,那么在输出不方便阅读,为了方便阅读,可以把数字对应的实际含义打印出来.首先数值映射sql写在sql语句里面, 在需要映射的列名前加上一个case , 比如说:定义性别 1代表男 0代表女 那么就可以在sql里面这样写  case gender when 1 then 男 when 0 then 女 end as genderName </p>
+<p>一定要起一个别名 end as 别名, 然后需要注意别名也需要添加到实体的属性里面,增加一个成员变量,相当于新增了一列作为别名.</p>
 </li>
 </ol>
 <p>​		在mapper里定义全局sql  在语句里添加sql引用</p>
